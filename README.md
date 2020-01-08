@@ -1,4 +1,4 @@
-# **idealo Ecommerce Solution**
+# **Ecommerce Solution**
 
 the below is inital proposal for building E-Commerce system
 
@@ -87,10 +87,10 @@ The exercise doesn’t mention the format of the pricing rules:
 
 * How can we make the design flexible enough so that we can add new styles of pricing rules in the future?
 
-## **Architecture Components**
+## **Solution Architecture Overview**
 
 <p align="center">
-<img src="https://github.com/mohamedibrahim-java/idealo/blob/master/resources/Idealo Components.png" width="800">
+<img src="https://github.com/mohamedibrahim-java/idealo/blob/master/resources/Idealo Business Model.png" width="500">
 </p>
 
 * ### Catalog Service
