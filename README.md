@@ -22,6 +22,7 @@ For example: Item 'A' costs 40 Cent individually, but this week there is a speci
 | B   | 50         | 2 for 80      |
 | C   | 25         |
 | D   | 20         |
+
 The checkout should accept items in any order. E.g. so if we scan B, A and another B, it will recognize
 the two B's and price them at 80 Cent, in order to result in a total price of 1,20 Euro.
 Because the pricing can change frequently, we need to be able to pass in a set of pricing rules each
@@ -30,10 +31,10 @@ time we start handling a checkout transaction.
 The interface to the checkout should look like this:
 
 ```java
-var checkout = new CheckOut(pricing_rules);
-checkout.scan(item);
-checkout.scan(item);
-price = checkout.total();
+    var checkout = new CheckOut(pricing_rules);
+    checkout.scan(item);
+    checkout.scan(item);
+    price = checkout.total();
 ```
 
 Here is a Unit test in Java. The helper method calculatePrice let’s you specify a sequence of items
@@ -41,41 +42,41 @@ Here is a Unit test in Java. The helper method calculatePrice let’s you specif
 
 ```java
 public class TestPrice {
-public int calculatePrice(String goods) {
-CheckOut checkout = new CheckOut(rule);
-for(int i=0; i<goods.length(); i++) {
-checkout.scan(String.valueOf(goods.charAt(i)));
-}
-return checkout.total();
-}
+    public int calculatePrice(String goods) {
+        CheckOut checkout = new CheckOut(rule);
+            for(int i=0; i<goods.length(); i++) {
+                checkout.scan(String.valueOf(goods.charAt(i)));
+            }
+        return checkout.total();
+    }
 
-@Test
-public void totals() {
-assertEquals(0, calculatePrice(""));
-assertEquals(40, calculatePrice("A"));
-assertEquals(90, calculatePrice("AB"));
-assertEquals(135, calculatePrice("CDBA"));
-assertEquals(80, calculatePrice("AA"));
-assertEquals(100, calculatePrice("AAA"));
-assertEquals(140, calculatePrice("AAAA"));
-assertEquals(180, calculatePrice("AAAAA"));
-assertEquals(200, calculatePrice("AAAAAA"));
-assertEquals(150, calculatePrice("AAAB"));
-assertEquals(180, calculatePrice("AAABB"));
-assertEquals(200, calculatePrice("AAABBD"));
-assertEquals(200, calculatePrice("DABABA"));
-}
+    @Test
+    public void totals() {
+        assertEquals(0, calculatePrice(""));
+        assertEquals(40, calculatePrice("A"));
+        assertEquals(90, calculatePrice("AB"));
+        assertEquals(135, calculatePrice("CDBA"));
+        assertEquals(80, calculatePrice("AA"));
+        assertEquals(100, calculatePrice("AAA"));
+        assertEquals(140, calculatePrice("AAAA"));
+        assertEquals(180, calculatePrice("AAAAA"));
+        assertEquals(200, calculatePrice("AAAAAA"));
+        assertEquals(150, calculatePrice("AAAB"));
+        assertEquals(180, calculatePrice("AAABB"));
+        assertEquals(200, calculatePrice("AAABBD"));
+        assertEquals(200, calculatePrice("DABABA"));
+    }
 
-@Test
-public void incremental() {
-CheckOut checkout = new CheckOut(rule);
-assertEquals(0, checkout.total);
-checkout.scan("A"); assertEquals(40, checkout.total);
-checkout.scan("B"); assertEquals(90, checkout.total);
-checkout.scan("A"); assertEquals(130, checkout.total);
-checkout.scan("A"); assertEquals(150, checkout.total);
-checkout.scan("B"); assertEquals(180, checkout.total);
-}
+    @Test
+    public void incremental() {
+        CheckOut checkout = new CheckOut(rule);
+        assertEquals(0, checkout.total);
+        checkout.scan("A"); assertEquals(40, checkout.total);
+        checkout.scan("B"); assertEquals(90, checkout.total);
+        checkout.scan("A"); assertEquals(130, checkout.total);
+        checkout.scan("A"); assertEquals(150, checkout.total);
+        checkout.scan("B"); assertEquals(180, checkout.total);
+    }
 }
 
 ```
