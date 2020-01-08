@@ -86,3 +86,29 @@ The exercise doesn’t mention the format of the pricing rules:
 * How can these be specified in such a way that the checkout doesn’t know about particular items and their pricing strategies?
 
 * How can we make the design flexible enough so that we can add new styles of pricing rules in the future?
+
+## **Architecture Components**
+
+<p align="center">
+<img src="https://github.com/mohamedibrahim-java/idealo/blob/master/resources/Idealo Components.png" width="800">
+</p>
+
+* ### Catalog Service
+
+* ### Profile Service
+
+* ### Order Service
+
+* ### Shopping Cart Service
+  
+* ### Inventory Service
+
+* ### Payment Service
+  
+* ### Delivery Service
+  
+* ### Notification Service
+
+* ### Promotion Service
+
+
